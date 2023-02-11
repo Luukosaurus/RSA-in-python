@@ -18,10 +18,6 @@ def getrelprime(pn):
         if pn%k != 0:
             if isrelprime(k,pn):
                 return k
-def getjslow(k,pn):
-    for i in range(1,pn):
-        if (i*k)%pn == 1:
-            return i
 def getjfast(k,pn):
     for i in range(100):
         if (1+i*pn)%k == 0:
@@ -46,7 +42,6 @@ def revert(convertedtekst):
     message = ''.join(messagelist)
     return message
 def decriptfaster(b,e,m):
-    #https://en.wikipedia.org/wiki/Modular_exponentiation
     if m == 1:
         return 0
     else:
@@ -62,11 +57,9 @@ if todo in "versturen":
     n = int(input("Wat is de eerste waarde van de publieke sleutel? "))
     k = int(input("Wat is de tweede waarde van de publieke sleutel? "))
     m = int(convert(input("Wat wil je versturen?\n")))
-    print(m)
     while m >= n:
         print("Je bericht getal mag niet groter zijn dan de n waarde")
         m = int(convert(input("Wat wil je versturen?\n")))
-    print(m)
     r = m**k+n
     print(f"Je versleutelde bericht is:\n{r}")
 if todo in "ontvangen":
@@ -76,16 +69,10 @@ if todo in "ontvangen":
     pn = (p-1)*(q-1)
     n = p*q
     k = getrelprime(pn)
-    print(k)
     j = getjfast(k,pn)
-    print(f"j={j}")
-    # j = getjslow(k,pn)
-    # print(j)
     m = decriptfaster(r,j,n)
-    # m= (r**j)%n
-    print(m)
     message = revert(str(m))
-    print(message)
+    print(f"Het ontvangen bericht is: {message}.")
 if todo in "aanmaken":
     p = int(input("Wat is de eerste waarde van je prive sleutel? "))
     while isprime(p) == False:
@@ -99,29 +86,3 @@ if todo in "aanmaken":
     pn = (p-1)*(q-1)
     k = getrelprime(pn)
     print(f"Je publieke sleutel is({n},{k})")
-
-
-
-# p = 3#int(input("Wat is p: "))
-# q = 211#int(input("Wat is q: "))
-# n = p*q
-# pn = (p-1)*(q-1)
-# k = getrelprime(pn)
-# print(k)
-# print(n)
-# print(pn)
-# m = 12
-# r = m**k+n
-# print(r)
-# j = getjslow(k,pn)
-# print(j)
-# m2= (r**j)%n
-# print(m2)
-
-
-
-
-# 513798374435182
-# 168787390185178432810
-# j*5 mod(12) = 1
-#j = (1/k%pn)
